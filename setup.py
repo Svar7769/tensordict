@@ -14,6 +14,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pybind11
+
 from setuptools import Extension, find_packages, setup
 from setuptools.command.build_ext import build_ext
 
@@ -75,6 +77,7 @@ class CMakeBuild(build_ext):
             f"-DPython3_EXECUTABLE={get_python_executable()}",
             # for windows
             "-DCMAKE_BUILD_TYPE=Release",
+            f"-Dpybind11_DIR={pybind11.get_cmake_dir()}",
         ]
 
         build_args = []
